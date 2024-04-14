@@ -113,124 +113,155 @@ mod test1 {
     }
 }
 
-// // ---------------------------------------------------------------------- 
-// // Part 2.
-// // ---------------------------------------------------------------------- 
+// ---------------------------------------------------------------------- 
+// Part 2.
+// ---------------------------------------------------------------------- 
 
-// pub fn create_array_1() -> [i32; 10] {
-//     // TODO
-// }
+pub fn create_array_1() -> [i32; 10] {
+    [0; 10]
+}
 
-// pub fn create_array_2(a: i32, b: i32, c: i32, d: i32) -> [i32; 4] {
-//     // TODO
-// }
+pub fn create_array_2(a: i32, b: i32, c: i32, d: i32) -> [i32; 4] {
+    [a, b, c, d]
+}
 
-// pub fn create_vec_empty() -> Vec<i32> {
-//     // TODO
-// }
+pub fn create_vec_empty() -> Vec<i32> {
+    vec![]
+}
 
-// pub fn create_vec_macro_1() -> Vec<i32> {
-//     // TODO
-// }
+pub fn create_vec_macro_1() -> Vec<i32> {
+    vec![0; 10]
+}
 
-// pub fn create_vec_macro_2(a: i32, b: i32, c: i32, d: i32) -> Vec<i32> {
-//     // TODO
-// }
+pub fn create_vec_macro_2(a: i32, b: i32, c: i32, d: i32) -> Vec<i32> {
+    vec![a, b, c, d]
+}
 
-// pub fn add_two(x: &mut Vec<i32>) {
-//     // TODO
-// }
+pub fn add_two(x: &mut Vec<i32>) {
+    x.push(2);
+}
 
-// pub fn set_to_one(x: &mut [i32]) {
-//     // TODO
-// }
+pub fn set_to_one(x: &mut [i32]) {
+    for i in 0..x.len() {
+        x[i] = 1;
+    }
+}
 
-// #[cfg(test)]
-// mod test2 {
-//     use super::*;
+#[cfg(test)]
+mod test2 {
+    use super::*;
 
-//     #[test]
-//     fn test_array_functions() {
-//         let mut arr1 = create_array_1();
-//         set_to_one(&mut arr1[..5]);
-//         assert_eq!(arr1, [1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
+    #[test]
+    fn test_array_functions() {
+        let mut arr1 = create_array_1();
+        set_to_one(&mut arr1[..5]);
+        assert_eq!(arr1, [1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
 
-//         let arr2 = create_array_2(6, 7, 8, 9);
-//         assert_eq!(arr2, [6, 7, 8, 9]);
-//     }
+        let arr2 = create_array_2(6, 7, 8, 9);
+        assert_eq!(arr2, [6, 7, 8, 9]);
+    }
 
-//     #[test]
-//     fn test_vec_functions() {
-//         let mut vec1 = create_vec_empty();
-//         add_two(&mut vec1);
-//         add_two(&mut vec1);
-//         add_two(&mut vec1);
-//         set_to_one(&mut vec1[..2]);
-//         assert_eq!(vec1, vec![1, 1, 2]);
+    #[test]
+    fn test_vec_functions() {
+        let mut vec1 = create_vec_empty();
+        add_two(&mut vec1);
+        add_two(&mut vec1);
+        add_two(&mut vec1);
+        set_to_one(&mut vec1[..2]);
+        assert_eq!(vec1, vec![1, 1, 2]);
 
-//         let mut vec2 = create_vec_macro_1();
-//         set_to_one(&mut vec2[5..]);
-//         assert_eq!(vec2, vec![0, 0, 0, 0, 0, 1, 1, 1, 1, 1]);
+        let mut vec2 = create_vec_macro_1();
+        set_to_one(&mut vec2[5..]);
+        assert_eq!(vec2, vec![0, 0, 0, 0, 0, 1, 1, 1, 1, 1]);
 
-//         let vec3 = create_vec_macro_2(6, 7, 8, 9);
-//         assert_eq!(vec3, vec![6, 7, 8, 9]);
-//     }
-// }
+        let vec3 = create_vec_macro_2(6, 7, 8, 9);
+        assert_eq!(vec3, vec![6, 7, 8, 9]);
+    }
+}
 
-// // ---------------------------------------------------------------------- 
-// // Part 3.
-// // ---------------------------------------------------------------------- 
+// ---------------------------------------------------------------------- 
+// Part 3.
+// ---------------------------------------------------------------------- 
 
-// pub fn vec_mean(data: &[f32]) -> f32 {
-//     // TODO
-// }
+pub fn vec_mean(data: &[f32]) -> f32 {
+    let sum: f32 = data.iter().sum();
+    sum / data.len() as f32
+}
 
-// pub fn vec_variance(data: &[f32]) -> f32 {
-//     // TODO
-// }
+pub fn vec_variance(data: &[f32]) -> f32 {
+    let n = data.len();
+    let vec_mean_ = vec_mean(data);
+    let vec_mean_pow: f32 = data.iter().map(|x| x.powi(2)).take(n).sum();
+    vec_mean_pow - vec_mean_.powi(2)
+}
 
-// pub fn iterator_factorial(n: u64) -> u64 {
-//     // TODO
-// }
+pub fn iterator_factorial(n: u64) -> u64 {
+    if n == 0 {1}
+    else {
+        let arr: Vec<u64> = (1..(n+1)).collect();
+        arr.iter().product()}
+}
 
-// pub fn primes_iterator() -> U64Filter {
-//     // TODO
-// }
+pub fn primes_iterator() -> U64Filter {
+    fn is_prime(n: &u64) -> bool {
+        let mut i = 2;
+        while i*i <= *n {
+            if n % i == 0 {
+                return false;
+            }
+            i += 1;
+        }
+        true
+    }
 
-// pub fn nth_prime(n: usize) -> u64 {
-//     // TODO
-// }
+    (2u64..).filter(is_prime)
 
-// pub fn n_primes(n: usize) -> Vec<u64> {
-//     // TODO
-// }
+    // (2u32..).filter(|x| {
+    //     let mut n = x - 1; 
+    //     while n > 1 {      
+    //         if x % n == 0 {
+    //             return false;
+    //         } 
+    //         n -= 1;
+    //     }
+    //     true
+    // })
+}
 
-// #[cfg(test)]
-// mod test3 {
-//     use super::*;
+pub fn nth_prime(n: usize) -> u64 {
+    primes_iterator().nth(n).unwrap()
+}
 
-//     #[test]
-//     fn test_iterator_factorial() {
-//         assert_eq!(iterator_factorial(0), 1);
-//         assert_eq!(iterator_factorial(1), 1);
-//         assert_eq!(iterator_factorial(3), 6);
-//         assert_eq!(iterator_factorial(5), 120);
-//         assert_eq!(iterator_factorial(10), 3628800);
-//     }
+pub fn n_primes(n: usize) -> Vec<u64> {
+    primes_iterator().take(n).collect()
+}
 
-//     #[test]
-//     fn test_n_primes() {
-//         assert_eq!(n_primes(1), vec![2]);
-//         assert_eq!(n_primes(2), vec![2, 3]);
-//         assert_eq!(n_primes(5), vec![2, 3, 5, 7, 11]);
-//         assert_eq!(n_primes(10), vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29]);
-//     }
+#[cfg(test)]
+mod test3 {
+    use super::*;
 
-//     #[test]
-//     fn test_nth_prime() {
-//         assert_eq!(nth_prime(0), 2);
-//         assert_eq!(nth_prime(1), 3);
-//         assert_eq!(nth_prime(5), 13);
-//         assert_eq!(nth_prime(10), 31);
-//     }
-// }
+    #[test]
+    fn test_iterator_factorial() {
+        assert_eq!(iterator_factorial(0), 1);
+        assert_eq!(iterator_factorial(1), 1);
+        assert_eq!(iterator_factorial(3), 6);
+        assert_eq!(iterator_factorial(5), 120);
+        assert_eq!(iterator_factorial(10), 3628800);
+    }
+
+    #[test]
+    fn test_n_primes() {
+        assert_eq!(n_primes(1), vec![2]);
+        assert_eq!(n_primes(2), vec![2, 3]);
+        assert_eq!(n_primes(5), vec![2, 3, 5, 7, 11]);
+        assert_eq!(n_primes(10), vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29]);
+    }
+
+    #[test]
+    fn test_nth_prime() {
+        assert_eq!(nth_prime(0), 2);
+        assert_eq!(nth_prime(1), 3);
+        assert_eq!(nth_prime(5), 13);
+        assert_eq!(nth_prime(10), 31);
+    }
+}
