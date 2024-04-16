@@ -1,4 +1,5 @@
 use std::fmt;
+use std::fs::read;
 use std::fs::File;
 use std::io::BufReader;
 use std::io::prelude::*;
@@ -10,7 +11,15 @@ pub struct Sudoku {
 
 impl Sudoku {
     /// Load a sudoku board from a file
-    pub fn load(file: &str) -> std::io::Result<Self> { }
+    pub fn load(file: &str) -> std::io::Result<Self> {
+        let f = File::open(file)?;
+        let reader = BufReader::new(f);
+
+        for line in reader.lines() {
+            let real_line = line?;
+            
+        }
+     }
 
     /// Solve the sudoku board (in-place)
     pub fn solve(&mut self) { }
