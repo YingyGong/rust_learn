@@ -130,25 +130,25 @@ pub fn explain_exercise_2() {
     
     let r = &s1; // start of reference r
 
-    takes_reference(r); // r is passed into the function, and r is invalidated
+    takes_reference(r); 
     
     takes_reference(&s2); // &s2 is passed into the function, 
                           // which doesn't influence s2 the variable
     takes_mut_reference(&mut s2);
 
-    takes_reference(r);
+    takes_reference(r); 
     takes_mut_reference(&mut s2);
 
-    // s2 is invalidated; s3 owns the string, start of variable s3
+    // s2 is not usable; s3 owns the string, start of variable s3
     let s3 = takes_ownership(s2); 
 
-    // s1 is invalidated; 
+    // s1 is not usable;
     // s2 starts its life again and owns the string hello world
     s2 = takes_ownership(s1); 
 
     takes_reference(&s2);
     takes_reference(&s3);
-} // s2, s3 die as well because they are out of scope
+} // r, s1, s2, s3 die as well because they are out of scope
 
 
 // ---------------------------------------------------------------------- 
