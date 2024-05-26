@@ -1,5 +1,3 @@
-use std::convert::TryInto;
-
 type U64Filter = std::iter::Filter<std::ops::RangeFrom<u64>, fn(&u64) -> bool>;
 
 
@@ -47,10 +45,10 @@ pub fn float_gcd(a: f32, b: f32) -> Result<f32, GCDError> {
    else if (a.fract() != 0.0) | (b.fract() != 0.0) {
     Err(GCDError::NotAnInteger)
    }
-   else if (a == 0.0) {
+   else if a == 0.0 {
     Ok(b)
     }
-    else if (b == 0.0) {
+    else if b == 0.0 {
      Ok(a)
     }
     else if a > b{
@@ -216,16 +214,6 @@ pub fn primes_iterator() -> U64Filter {
 
     (2u64..).filter(is_prime)
 
-    // (2u32..).filter(|x| {
-    //     let mut n = x - 1; 
-    //     while n > 1 {      
-    //         if x % n == 0 {
-    //             return false;
-    //         } 
-    //         n -= 1;
-    //     }
-    //     true
-    // })
 }
 
 pub fn nth_prime(n: usize) -> u64 {
